@@ -24,6 +24,17 @@ cd restfulBookerAPITestig
 npm install
 ```
 
+## For the purposes of this exam, I will provide credentials in this file. However, 
+## in a real-world scenario, these should be securely managed and integrated within a CI/CD pipeline.
+
+## In the root directory of your project, create a file named .env
+
+## Add the following environment variables:
+
+API_USERNAME=admin
+API_PASSWORD=password123
+API_URL=https://restful-booker.herokuapp.com
+
 ## Running Tests
 
 To execute the test suite, run:
