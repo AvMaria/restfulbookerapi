@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx wdio run wdio.conf.js",
     "wdio": "wdio run ./wdio.conf.js"
   },
   "keywords": [],
@@ -17,5 +17,9 @@
     "@wdio/spec-reporter": "^9.14.0",
     "chai": "^5.2.0",
     "mocha": "^11.2.2"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "dotenv": "^16.5.0"
   }
 }
