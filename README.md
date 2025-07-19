@@ -58,9 +58,9 @@ npm test
 | RQ003          | API should reject invalid authentication      | `POST /auth`  | TC003           | Invalid credentials return "Bad credentials"           |
 | RQ004          | API should allow creating a booking           | `POST /booking` | TC004         | Valid booking returns 200 and booking ID               |
 | RQ005          | API should validate required booking fields   | `POST /booking` | TC005         | Missing fields return error (500 or validation)        |
-| RQ006          | API should return a list of all booking IDs   | `GET /booking` | TC006         |Get all booking IDs
-        |
-| RQ007          | API should return booking details by ID   | `GET /booking/{id}` | TC007,TC008        |Valid ID returns booking; invalid ID returns 404
+| RQ006          | API should return a list of all booking IDs   | `GET /booking` | TC006         |Get all booking IDs                                     |
+| RQ007          | API should return booking details by ID   | `GET /booking/{id}` | 
+TC007,TC008        |Valid ID returns booking; invalid ID returns 404
         |
 | RQ008          | API should allow full booking update   | `PUT /booking/{id}` | TC009        |Full update with valid token returns updated booking
         |
