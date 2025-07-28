@@ -1,7 +1,13 @@
 const axios = require('axios');
 const AuthAPI = require('./auth.api');
+const { retryRequest } = require('../../helpers/testHelpers');
 
 class BookingAPI {
+  async getHealthStatus() {
+    const response = await retryRequest(() => axios.get(`${process.env.API_URL}/ping`));
+    return response;
+  }
+
   async createBooking(data) {
     let response;
     try {
@@ -29,11 +35,7 @@ class BookingAPI {
 
       return response;
     } catch (error) {
-      console.error(
-        'Booking consultation failed:',
-        error.response?.status,
-        error.response?.data
-      );
+      console.error('Booking consultation failed:', error.response?.status, error.response?.data);
 
       return error.response;
     }
@@ -43,24 +45,16 @@ class BookingAPI {
     try {
       const token = await AuthAPI.getToken();
 
-      const response = await axios.put(
-        `${process.env.API_URL}/booking/${id}`,
-        updateData,
-        {
-          headers: {
-            Cookie: `token=${token}`,
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-        }
-      );
+      const response = await axios.put(`${process.env.API_URL}/booking/${id}`, updateData, {
+        headers: {
+          Cookie: `token=${token}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
       return response;
     } catch (error) {
-      console.error(
-        'Booking update failed:',
-        error.response?.status,
-        error.response?.data
-      );
+      console.error('Booking update failed:', error.response?.status, error.response?.data);
       return error.response;
     }
   }
@@ -69,14 +63,11 @@ class BookingAPI {
     try {
       const token = await AuthAPI.getToken();
 
-      const response = await axios.delete(
-        `${process.env.API_URL}/booking/${id}`,
-        {
-          headers: {
-            Cookie: `token=${token}`,
-          },
-        }
-      );
+      const response = await axios.delete(`${process.env.API_URL}/booking/${id}`, {
+        headers: {
+          Cookie: `token=${token}`,
+        },
+      });
 
       return response;
     } catch (error) {

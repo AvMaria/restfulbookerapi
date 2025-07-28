@@ -26,10 +26,7 @@ describe('Booking API', () => {
   });
 
   it('should update a booking', async () => {
-    const res = await Endpoints.updateBooking(
-      bookingId,
-      bookingData.updateBooking
-    );
+    const res = await Endpoints.updateBooking(bookingId, bookingData.updateBooking);
 
     expect(res.status).to.equal(200);
     expect(res.data).to.deep.include(bookingData.updateBooking);

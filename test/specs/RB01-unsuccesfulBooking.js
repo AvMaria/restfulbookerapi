@@ -9,9 +9,7 @@ describe('Booking API', () => {
   });
 
   it('should not retrieve a booking', async () => {
-    const res = await Endpoints.getBooking(
-      bookingData.invalidBooking.bookingID
-    );
+    const res = await Endpoints.getBooking(bookingData.invalidBooking.bookingID);
 
     expect(res.status).to.not.be.oneOf([200, 500]);
   });
