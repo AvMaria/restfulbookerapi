@@ -4,7 +4,9 @@ const { retryRequest } = require('../../helpers/testHelpers');
 
 class BookingAPI {
   async getHealthStatus() {
-    const response = await retryRequest(() => axios.get(`${process.env.API_URL}/ping`));
+    const response = await retryRequest(() =>
+      axios.get(`${process.env.API_URL}/ping`)
+    );
     return response;
   }
 

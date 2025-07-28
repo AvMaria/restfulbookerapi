@@ -18,7 +18,7 @@ async function retryRequest(requestFn, retries = 3, delay = 6000) {
       if (attempt === retries) {
         throw new Error(`Request failed after ${attempt} attempt(s). Error: ${err.message}`);
       }
-      console.log(`⏳ Waiting ${waitTime}ms before retrying...\n`);
+      console.log(` Waiting ${waitTime}ms before retrying...\n`);
 
       await new Promise((resolve) => {
         setTimeout(() => {

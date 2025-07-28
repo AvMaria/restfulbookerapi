@@ -1,4 +1,6 @@
 require('dotenv').config();
+const endpoints = require('./test/api/endpoints.api');
+
 
 exports.config = {
     //
@@ -147,8 +149,17 @@ exports.config = {
      * @param {object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+    onPrepare: async function () {
+        console.log(' Checking API health status before starting tests...');
+    try {
+        await endpoints.getHealthStatus();
+        console.log(' API is healthy. Starting test run...');
+    } catch (error) {
+      console.error('Error message:', error.message);
+      console.error(' API health check failed. Stopping test suite.');
+      process.exit(1); 
+      }
+     },
     /**
      * Gets executed before a worker process is spawned and can be used to initialize specific service
      * for that worker as well as modify runtime environments in an async fashion.
