@@ -1,5 +1,5 @@
 require('dotenv').config();
-const endpoints = require('./test/api/endpoints.api');
+const endpoints = require('./endpoints/endpoints.api');
 
 
 exports.config = {
@@ -25,8 +25,14 @@ exports.config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './test/specs/**/*.js'
+        './tests/**/*.test.js'
     ],
+    // Define test suites
+    suites: {
+    api: ['./tests/api/**/*.test.js'],
+    ui: ['./tests/ui/**/*.test.js'],
+    integration: ['./tests/integrationApi/**/*.test.js'],
+    },
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'

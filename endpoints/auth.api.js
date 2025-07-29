@@ -5,17 +5,17 @@ class AuthAPI {
     this.token = null;
   }
 
-  async getToken() {
+  async getToken(url, user, pass) {
     if (this.token) return this.token;
 
-    const response = await axios.post(`${process.env.API_URL}/auth`, {
-      username: process.env.API_USERNAME,
-      password: process.env.API_PASSWORD,
+    const response = await axios.post(`${url}/auth`, {
+      username: user,
+      password: pass,
     });
 
     if (response.status === 200 && response.data.token) {
       this.token = response.data.token;
-      return this.token;
+      return response;
     } else {
       throw new Error('Authentication failed');
     }

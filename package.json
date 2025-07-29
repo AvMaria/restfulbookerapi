@@ -4,6 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "npx wdio run wdio.conf.js",
+    "test:api": "npx wdio run wdio.conf.js --suite api",
+    "test:ui": "npx wdio run wdio.conf.js --suite ui",
+    "test:api:file": "npx wdio run wdio.conf.js --spec",
     "wdio": "wdio run ./wdio.conf.js",
     "format": "prettier --write ."
   },
