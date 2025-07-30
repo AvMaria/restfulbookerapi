@@ -1,42 +1,28 @@
 const { expect } = require('chai');
-require('dotenv').config();
-const Endpoints = require('../../endpoints/endpoints.api');
 const AuthAPI = require('../../endpoints/auth.api');
-const bookingData = require('../../testData/validBookingData.json');
+
+const user1Api = new AuthAPI();
+const user2Api = new AuthAPI();
+const url = process.env.API_URL;
+const user1 = process.env.API_USERNAME;
+const pass1 = process.env.API_PASSWORD;
+const user2 = process.env.API_INVUSERNAME;
+const pass2 = process.env.API_INVPASSWORD;
 
 describe('Auth API - Login Endpoint', () => {
   it('should return a token for valid credentials (positive test)', async () => {
-    const url = 'https://restful-booker.herokuapp.com';
-    const user = 'admin';
-    const pass = 'password123';
+    const response = await user1Api.getToken(url, user1, pass1);
+    expect(response.status).to.equal(200);
+    expect(response.headers).to.have.property('content-type');
+    expect(response.headers['content-type']).to.include('application/json');
+    expect(response.data).to.have.property('token').that.is.a('string');
+  });
 
-    const res = await AuthAPI.getToken(url, user, pass);
-
-    expect(res.status).to.equal(200);
+  it('should return 200 for invalid credentials with body message "Bad Credentials" (negative test)', async () => {
+    const response = await user2Api.getToken(url, user2, pass2);
+    expect(response.status).to.equal(200);
+    expect(response.data)
+      .to.have.property('reason')
+      .to.include('Bad credentials');
   });
 });
-//
-//  it('should return 401 for invalid credentials (negative test)', async () => {
-//    const res = await Endpoints.getBooking(bookingId);
-//
-//    expect(res.status).to.equal(200);
-//    expect(res.data).to.deep.include(bookingData.validBooking);
-//  });
-//
-//  it('should update a booking', async () => {
-//    const res = await Endpoints.updateBooking(
-//      bookingId,
-//      bookingData.updateBooking
-//    );
-//
-//    expect(res.status).to.equal(200);
-//    expect(res.data).to.deep.include(bookingData.updateBooking);
-//  });
-//
-//  it('should delete a booking', async () => {
-//    const res = await Endpoints.deleteBooking(bookingId);
-//
-//    expect(res.status).to.equal(201);
-//    expect(res.data).to.include('Created');
-//  });
-//});
