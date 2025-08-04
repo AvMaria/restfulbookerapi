@@ -10,17 +10,19 @@ class BookingAPI {
     return response;
   }
 
-  async createBooking(data) {
-    let response;
+  async createBooking(url, data) {
     try {
-      response = await axios.post(`${process.env.API_URL}/booking`, data, {
+      const response = await axios.post(`${url}/booking`, data, {
         headers: {
-          'Content-Type': 'application/json',
           Accept: 'application/json',
         },
       });
+      console.log(response);
       return response;
     } catch (error) {
+      console.log('Status:', error.response.status);
+      console.log('Headers:', error.response.headers);
+      console.log('Body:', error.response.data);
       return error.response;
     }
   }

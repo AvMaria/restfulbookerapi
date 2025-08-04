@@ -11,15 +11,14 @@ const pass2 = process.env.API_INVPASSWORD;
 
 describe('Auth API - Login Endpoint', () => {
   it('should return a token for valid credentials (positive test)', async () => {
-    const response = await user1Api.getToken(url, user1, pass1);
+    const response = await user1Api.getAuthResponse(url, user1, pass1);
     expect(response.status).to.equal(200);
-    expect(response.headers).to.have.property('content-type');
     expect(response.headers['content-type']).to.include('application/json');
     expect(response.data).to.have.property('token').that.is.a('string');
   });
 
   it('should return 200 for invalid credentials with body message "Bad Credentials" (negative test)', async () => {
-    const response = await user2Api.getToken(url, user2, pass2);
+    const response = await user2Api.getAuthResponse(url, user2, pass2);
     expect(response.status).to.equal(200);
     expect(response.data)
       .to.have.property('reason')

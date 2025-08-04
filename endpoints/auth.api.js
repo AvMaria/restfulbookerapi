@@ -5,7 +5,7 @@ class AuthAPI {
     this.token = null;
   }
 
-  async getToken(url, user, pass) {
+  async getAuthResponse(url, user, pass) {
     //Check this one latter
     if (this.token) return this.token;
     try {
@@ -33,6 +33,11 @@ class AuthAPI {
         };
       }
     }
+  }
+
+  async getToken(url, user, pass) {
+    await getAuthResponse(url, user, pass);
+    return this.token;
   }
 
   resetToken() {
