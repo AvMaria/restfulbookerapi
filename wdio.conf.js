@@ -66,8 +66,9 @@ exports.config = {
       '--headless=new', 
       '--no-sandbox', 
       '--disable-dev-shm-usage', 
-      '--disable-gpu'
-        ]
+      '--disable-gpu',
+      `--user-data-dir=/tmp/chrome-profile-${Math.floor(Math.random() * 10000)}`
+     ]
     }
     }],
 
