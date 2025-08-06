@@ -53,13 +53,20 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 1,
+    maxInstances: 2,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [],
+    capabilities: [
+        {
+            browserName: 'chrome',
+            'goog:chromeOptions': {
+              args: ['--headless','--no-sandbox', '--disable-gpu']
+            }
+        }
+    ],
 
     //
     // ===================
@@ -108,7 +115,10 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [],
+    services: [
+        ['chromedriver']
+
+        ],
     //
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
