@@ -1,0 +1,20 @@
+FROM node:20-bookworm-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+git \
+ca-certificates \
+curl \
+unzip \
+&& rm -rf /var/lib/apt/lists/*
+
+COPY package*.json ./
+
+RUN npm ci --omit=dev=false
+
+COPY . .
+
+RUN mkdir -p /app/reports
+
+CMD ["npm", "run", "test"]
+
+

@@ -1,0 +1,25 @@
+services:
+  selenium:
+    
+    image: selenium/standalone-chromium:4.35.0
+    shm_size: "2gb"  
+    
+    ports:
+      - "4444:4444"
+
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.tests
+    depends_on:
+      - selenium
+    environment:
+      - USE_SELENIUM=true
+      - SELENIUM_HOST=selenium
+      - SELENIUM_PORT=4444
+      - SELENIUM_PATH=/       
+    volumes:
+      - ./reports:/app/reports  
+
+
+

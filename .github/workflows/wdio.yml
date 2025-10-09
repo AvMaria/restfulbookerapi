@@ -18,20 +18,23 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
+    - name: Set up Docker
+      run: docker --version
+   
+    - name: Build Docker image
+      run: |
+        docker build \
+          -t wdio-tests:ci .
 
-    - name: Install dependencies
-      run: npm ci
+    - name: Run WDIO tests inside container
+      run: |
+          docker run --rm 
+          -e API_USERNAME=${{ secrets.API_USERNAME }} \
+          -e API_PASSWORD: ${{ secrets.API_PASSWORD }} \
+          -e API_URL: ${{ secrets.API_URL }}\
+          -e API_INVUSERNAME: ${{ secrets.API_INVUSERNAME }} \
+          -e API_INVPASSWORD: ${{ secrets.API_INVPASSWORD }} \
+          -e API_INVURL: ${{ secrets.API_INVURL }} \
+          wdio-tests:ci 
 
-    - name: Run WDIO tests
-      env:
-            API_USERNAME: ${{ secrets.API_USERNAME }}
-            API_PASSWORD: ${{ secrets.API_PASSWORD }}
-            API_URL: ${{ secrets.API_URL }}
-            API_INVUSERNAME: ${{ secrets.API_INVUSERNAME }}
-            API_INVPASSWORD: ${{ secrets.API_INVPASSWORD }}
-            API_INVURL: ${{ secrets.API_INVURL }}
-      run: npm run test
+      
