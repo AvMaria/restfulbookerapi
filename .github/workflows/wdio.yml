@@ -24,7 +24,7 @@ jobs:
     - name: Build Docker image
       run: |
         docker build \
-          -t wdio-tests:ci .
+          -t wdio-tests:ci -f Dockerfile.tests .
 
     - name: Run WDIO tests inside container
       run: |
