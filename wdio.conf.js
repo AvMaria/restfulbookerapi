@@ -117,8 +117,8 @@ exports.config = {
     // commands. Instead, they hook themselves up into the test process.
     // === Remote WebDriver (Selenium) ===
     hostname: process.env.SELENIUM_HOST || 'localhost',
-port: parseInt(process.env.SELENIUM_PORT || '9515'), 
-path: process.env.SELENIUM_PATH || '/',
+    port: parseInt(process.env.SELENIUM_PORT || '9515'), 
+    path: process.env.SELENIUM_PATH || '/',
 
     services: process.env.USE_SELENIUM === 'true'
     ? [] 

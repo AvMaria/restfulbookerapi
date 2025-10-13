@@ -17,7 +17,13 @@ services:
       - USE_SELENIUM=true
       - SELENIUM_HOST=selenium
       - SELENIUM_PORT=4444
-      - SELENIUM_PATH=/       
+      - SELENIUM_PATH=/
+      - API_USERNAME=${API_USERNAME}
+      - API_PASSWORD=${API_PASSWORD}
+      - API_URL=${API_URL}
+      - API_INVUSERNAME=${API_INVUSERNAME}
+      - API_INVPASSWORD=${API_INVPASSWORD}
+      - API_INVURL=${API_INVURL}       
     volumes:
       - ./reports:/app/reports  
 
