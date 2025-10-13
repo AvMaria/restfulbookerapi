@@ -28,13 +28,13 @@ jobs:
 
     - name: Run WDIO tests inside container
       run: |
-          docker run --rm wdio-tests:ci
+          docker run --rm wdio-tests:ci \
           -e API_USERNAME=${{ secrets.API_USERNAME }} \
           -e API_PASSWORD: ${{ secrets.API_PASSWORD }} \
           -e API_URL: ${{ secrets.API_URL }}\
           -e API_INVUSERNAME: ${{ secrets.API_INVUSERNAME }} \
           -e API_INVPASSWORD: ${{ secrets.API_INVPASSWORD }} \
-          -e API_INVURL: ${{ secrets.API_INVURL }} \
+          -e API_INVURL: ${{ secrets.API_INVURL }} 
            
 
       
