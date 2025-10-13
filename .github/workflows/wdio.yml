@@ -34,12 +34,12 @@ jobs:
           echo "API_INVURL=${{ secrets.API_INVURL }}" >> $GITHUB_ENV
 
     - name: Build and run WDIO tests
-        run: |
+      run: |
           docker-compose -f restfulbookerapi/docker-compose.yml up --build --abort-on-container-exit
 
     - name: Shutdown Docker Compose
-        if: always()
-        run: docker-compose -f restfulbookerapi/docker-compose.yml down
+      if: always()
+      run: docker-compose -f restfulbookerapi/docker-compose.yml down
 
     
 
