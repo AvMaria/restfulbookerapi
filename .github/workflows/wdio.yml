@@ -35,11 +35,11 @@ jobs:
 
     - name: Build and run WDIO tests
       run: |
-          docker-compose -f restfulbookerapi/docker-compose.yml up --build --abort-on-container-exit
+          docker-compose -f docker-compose.yml up --build --abort-on-container-exit
 
     - name: Shutdown Docker Compose
       if: always()
-      run: docker-compose -f restfulbookerapi/docker-compose.yml down
+      run: docker-compose -f docker-compose.yml down
 
     
 
