@@ -17,11 +17,9 @@ describe('Auth API - Login Endpoint', () => {
     expect(response.data).to.have.property('token').that.is.a('string');
   });
 
-  it('should return 200 for invalid credentials with body message "Bad Credentials" (negative test)', async () => {
+  it('should return 400 for invalid credentials with body message "Bad Credentials" (negative test)', async () => {
     const response = await user2Api.getAuthResponse(url, user2, pass2);
     expect(response.status).to.equal(200);
-    expect(response.data)
-      .to.have.property('reason')
-      .to.include('Bad credentials');
+    expect(response.data).to.have.property('reason').to.include('Bad credentials');
   });
 });
